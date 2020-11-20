@@ -28,12 +28,12 @@ import WinSDK
 //===----------------------------------------------------------------------===//
 
 public struct PythonLibrary {
-    private static let shared = PythonLibrary()
-    private static let pythonLegacySymbolName = "PyString_AsString"
-    private static var librarySymbolsLoaded = false
+    public static let shared = PythonLibrary()
+    public static let pythonLegacySymbolName = "PyString_AsString"
+    public static var librarySymbolsLoaded = false
     
-    private let pythonLibraryHandle: UnsafeMutableRawPointer
-    private let isLegacyPython: Bool
+    public let pythonLibraryHandle: UnsafeMutableRawPointer
+    public let isLegacyPython: Bool
     
     private init() {
         guard let pythonLibraryHandle = PythonLibrary.loadPythonLibrary() else {
@@ -95,7 +95,7 @@ public extension PythonLibrary {
 }
 
 // `PythonVersion` struct that defines a given Python version.
-private extension PythonLibrary {
+public extension PythonLibrary {
     struct PythonVersion {
         let major: Int
         let minor: Int?
@@ -118,7 +118,7 @@ private extension PythonLibrary {
 }
 
 // `PythonLibrary.Environment` enum used to read and set environment variables.
-private extension PythonLibrary {
+public extension PythonLibrary {
     enum Environment: String {
         private static let keyPrefix = "PYTHON"
         private static let keySeparator = "_"
@@ -147,7 +147,7 @@ private extension PythonLibrary {
 }
 
 // Methods of `PythonLibrary` required to load the Python library.
-private extension PythonLibrary {
+public extension PythonLibrary {
     static let supportedMajorVersions: [Int] = [3, 2]
     static let supportedMinorVersions: [Int] = Array(0...30).reversed()
     
